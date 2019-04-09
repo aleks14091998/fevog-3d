@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6566CDA1-12D9-469C-A736-40623EB0EE30}</ProjectGuid>
+    <RootNamespace>FEVOG</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>D:\projects\c++\FEVOG\fevog-3d\FEVOG\extern;D:\projects\c++\FEVOG\fevog-3d\FEVOG\source\engine;D:\projects\c++\FEVOG\fevog-3d\FEVOG\source\editor;D:\projects\c++\FEVOG\fevog-3d\FEVOG\resource;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>D:\projects\c++\FEVOG\FEVOG\extern;D:\projects\c++\FEVOG\FEVOG\source\engine;D:\projects\c++\FEVOG\FEVOG\source\editor;D:\projects\c++\FEVOG\FEVOG\resource;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\projects\c++\FEVOG\fevog-3d\FEVOG\extern;D:\projects\c++\FEVOG\fevog-3d\FEVOG\source\engine;D:\projects\c++\FEVOG\fevog-3d\FEVOG\source\editor;D:\projects\c++\FEVOG\fevog-3d\FEVOG\resource;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\projects\c++\FEVOG\FEVOG\extern;D:\projects\c++\FEVOG\FEVOG\source\engine;D:\projects\c++\FEVOG\FEVOG\source\editor;D:\projects\c++\FEVOG\FEVOG\resource;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="extern\gl\gl_core_4_3.cpp" />
+    <ClCompile Include="source\editor\editor.cpp" />
+    <ClCompile Include="source\editor\object.cpp" />
+    <ClCompile Include="source\editor\objects\Camera.cpp" />
+    <ClCompile Include="source\editor\scene.cpp" />
+    <ClCompile Include="source\engine\core\core.cpp" />
+    <ClCompile Include="source\engine\managers\ResourceManager.cpp" />
+    <ClCompile Include="source\engine\managers\WindowManager.cpp" />
+    <ClCompile Include="source\engine\platform\windows\Input.cpp" />
+    <ClCompile Include="source\engine\platform\windows\MainWindow.cpp" />
+    <ClCompile Include="source\engine\platform\windows\PlatformUtils.cpp" />
+    <ClCompile Include="source\engine\renderer\GL43\GeometryBufferGL43.cpp" />
+    <ClCompile Include="source\engine\renderer\GL43\RenderGL43.cpp" />
+    <ClCompile Include="source\engine\renderer\GL43\TextureGL43.cpp" />
+    <ClCompile Include="source\engine\renderer\Material.cpp" />
+    <ClCompile Include="source\engine\Utils.cpp" />
+    <ClCompile Include="source\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="extern\gl\gl_core_4_3.hpp" />
+    <ClInclude Include="source\editor\component.h" />
+    <ClInclude Include="source\editor\editor.h" />
+    <ClInclude Include="source\editor\HeadersGame.h" />
+    <ClInclude Include="source\editor\object.h" />
+    <ClInclude Include="source\editor\objects\Camera.h" />
+    <ClInclude Include="source\editor\scene.h" />
+    <ClInclude Include="source\engine\common.h" />
+    <ClInclude Include="source\engine\core\core.h" />
+    <ClInclude Include="source\engine\FEV_Eng.h" />
+    <ClInclude Include="source\engine\FuncDelegate.h" />
+    <ClInclude Include="source\engine\iobject.h" />
+    <ClInclude Include="source\engine\managers\ResourceManager.h" />
+    <ClInclude Include="source\engine\managers\WindowManager.h" />
+    <ClInclude Include="source\engine\platform\PlatformAPI.h" />
+    <ClInclude Include="source\engine\platform\windows\constants.h" />
+    <ClInclude Include="source\engine\platform\windows\Input.h" />
+    <ClInclude Include="source\engine\platform\windows\MainWindow.h" />
+    <ClInclude Include="source\engine\renderer\GeometryBuffer.h" />
+    <ClInclude Include="source\engine\renderer\GL43\GeometryBufferGL43.h" />
+    <ClInclude Include="source\engine\renderer\GL43\GL43.h" />
+    <ClInclude Include="source\engine\renderer\GL43\RenderGL43.h" />
+    <ClInclude Include="source\engine\renderer\GL43\ShaderGL43.h" />
+    <ClInclude Include="source\engine\renderer\GL43\TextureGL43.h" />
+    <ClInclude Include="source\engine\renderer\Material.h" />
+    <ClInclude Include="source\engine\renderer\Resource.h" />
+    <ClInclude Include="source\engine\renderer\Shader.h" />
+    <ClInclude Include="source\engine\renderer\Texture.h" />
+    <ClInclude Include="source\engine\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="source\engine\platform\windows\window_res.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

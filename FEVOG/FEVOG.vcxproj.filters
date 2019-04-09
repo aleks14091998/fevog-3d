@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\editor">
+      <UniqueIdentifier>{c62496ab-787b-4f56-9d55-9b895838698a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\editor">
+      <UniqueIdentifier>{cda84235-7b2a-4325-bbad-6ced9c0bdc41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\editor\objects">
+      <UniqueIdentifier>{adeccaef-7c5e-43b0-be61-c03ec7b39f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\editor\objects">
+      <UniqueIdentifier>{ca97aa63-df45-4199-8f26-26d1f88aa483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine">
+      <UniqueIdentifier>{06369c19-96c1-4dbf-bb78-db98c49e12a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine">
+      <UniqueIdentifier>{782fe243-4dd6-4f6f-bd5d-d021127f9323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\rendere">
+      <UniqueIdentifier>{31a1c9f1-fc5b-4e7a-9617-6654b236e358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\rendere\GL43">
+      <UniqueIdentifier>{cc8016db-c921-4391-846a-71d677b9cefe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\rendere">
+      <UniqueIdentifier>{68e32929-ccdd-40b0-abcd-7cc94a596d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\rendere\GL43">
+      <UniqueIdentifier>{9be87799-6498-4b43-aa0f-b2b8e2ae2772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\platform">
+      <UniqueIdentifier>{09ee5f40-b695-4916-89f5-46640e8b33fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\platform\windows">
+      <UniqueIdentifier>{9d6d62e1-b0a0-42c1-bd58-0e85ef45f3c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\platform">
+      <UniqueIdentifier>{a961ae10-36fe-460f-872e-b12055e84907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\platform\windows">
+      <UniqueIdentifier>{465b8373-311a-425f-8199-02f3cce7172c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\core">
+      <UniqueIdentifier>{74188c35-61c7-4e29-9014-953b53c7e31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\core">
+      <UniqueIdentifier>{1aa89d9f-8c42-413d-b59a-ec528b82423b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\managers">
+      <UniqueIdentifier>{8097c495-0eb8-4024-a8a4-a18a2a621824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\managers">
+      <UniqueIdentifier>{32980d6c-3902-4611-bfc9-21ef88908e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\extern">
+      <UniqueIdentifier>{e38b77ce-768e-4057-a390-74666e5e3118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\extern">
+      <UniqueIdentifier>{9dbff4f5-ca62-4980-a95f-71022be7b263}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\editor\objects\Camera.cpp">
+      <Filter>Исходные файлы\editor\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\editor\editor.cpp">
+      <Filter>Исходные файлы\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\editor\object.cpp">
+      <Filter>Исходные файлы\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\editor\scene.cpp">
+      <Filter>Исходные файлы\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\Utils.cpp">
+      <Filter>Исходные файлы\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\renderer\Material.cpp">
+      <Filter>Исходные файлы\engine\rendere</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\renderer\GL43\GeometryBufferGL43.cpp">
+      <Filter>Исходные файлы\engine\rendere\GL43</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\renderer\GL43\RenderGL43.cpp">
+      <Filter>Исходные файлы\engine\rendere\GL43</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\renderer\GL43\TextureGL43.cpp">
+      <Filter>Исходные файлы\engine\rendere\GL43</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\platform\windows\Input.cpp">
+      <Filter>Исходные файлы\engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\platform\windows\MainWindow.cpp">
+      <Filter>Исходные файлы\engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\platform\windows\PlatformUtils.cpp">
+      <Filter>Исходные файлы\engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\core\core.cpp">
+      <Filter>Исходные файлы\engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\managers\ResourceManager.cpp">
+      <Filter>Исходные файлы\engine\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\managers\WindowManager.cpp">
+      <Filter>Исходные файлы\engine\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\gl\gl_core_4_3.cpp">
+      <Filter>Исходные файлы\extern</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\editor\objects\Camera.h">
+      <Filter>Файлы заголовков\editor\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\component.h">
+      <Filter>Файлы заголовков\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\editor.h">
+      <Filter>Файлы заголовков\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\HeadersGame.h">
+      <Filter>Файлы заголовков\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\object.h">
+      <Filter>Файлы заголовков\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\scene.h">
+      <Filter>Файлы заголовков\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\common.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\FEV_Eng.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\FuncDelegate.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\iobject.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\Utils.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GeometryBuffer.h">
+      <Filter>Файлы заголовков\engine\rendere</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\Material.h">
+      <Filter>Файлы заголовков\engine\rendere</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\Resource.h">
+      <Filter>Файлы заголовков\engine\rendere</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\Shader.h">
+      <Filter>Файлы заголовков\engine\rendere</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\Texture.h">
+      <Filter>Файлы заголовков\engine\rendere</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GL43\GeometryBufferGL43.h">
+      <Filter>Файлы заголовков\engine\rendere\GL43</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GL43\GL43.h">
+      <Filter>Файлы заголовков\engine\rendere\GL43</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GL43\RenderGL43.h">
+      <Filter>Файлы заголовков\engine\rendere\GL43</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GL43\ShaderGL43.h">
+      <Filter>Файлы заголовков\engine\rendere\GL43</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\renderer\GL43\TextureGL43.h">
+      <Filter>Файлы заголовков\engine\rendere\GL43</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\platform\PlatformAPI.h">
+      <Filter>Файлы заголовков\engine\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\platform\windows\constants.h">
+      <Filter>Файлы заголовков\engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\platform\windows\Input.h">
+      <Filter>Файлы заголовков\engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\platform\windows\MainWindow.h">
+      <Filter>Файлы заголовков\engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\core\core.h">
+      <Filter>Файлы заголовков\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\managers\ResourceManager.h">
+      <Filter>Файлы заголовков\engine\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\managers\WindowManager.h">
+      <Filter>Файлы заголовков\engine\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\gl\gl_core_4_3.hpp">
+      <Filter>Файлы заголовков\extern</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="source\engine\platform\windows\window_res.rc">
+      <Filter>Файлы заголовков\engine\platform\windows</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
