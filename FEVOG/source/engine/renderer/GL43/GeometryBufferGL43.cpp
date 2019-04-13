@@ -63,14 +63,11 @@ void CGeometryBufferGL43::setup() {
 	gl::BindBuffer(gl::ARRAY_BUFFER, VBO);
 	gl::BufferData(gl::ARRAY_BUFFER, sizeof(vertices), vertices, gl::STATIC_DRAW);
 
-	gl::BindBuffer(gl::ARRAY_BUFFER, VBO);
 	gl::VertexAttribPointer(0, 3, gl::FLOAT, gl::FALSE_, 8 * sizeof(float), (void*)0);
-
-	gl::BindBuffer(gl::ARRAY_BUFFER, VBO);
 	gl::VertexAttribPointer(1, 3, gl::FLOAT, gl::FALSE_, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-
 	gl::VertexAttribPointer(2, 2, gl::FLOAT, gl::FALSE_, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
+	gl::BindVertexArray(0);
 	gl::BindVertexArray(0);
 }
 
