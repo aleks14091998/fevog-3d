@@ -41,7 +41,6 @@ public:
 	virtual HRESULT KillWindow() = 0;
 	virtual HRESULT Destroy() = 0;
 	virtual HRESULT GetWindowHandle(WindowHandle& result) = 0;
-	virtual HRESULT GetRenderHandle(WindowHandle& result) = 0;
 	virtual HRESULT GetClientRect(int32 &l, int32 &r, int32 &t, int32 &b) = 0;
 	virtual HRESULT InitRender() = 0;
 	virtual void UpdateObjectList(std::vector<IObject*> objList) = 0;

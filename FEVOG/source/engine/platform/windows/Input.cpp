@@ -27,7 +27,7 @@ HRESULT CInput::Init(IMainWindow* window) {
 	_bExclusive = false;
 	_bHideCursor = true;
 
-	window->GetRenderHandle(_hWnd);
+	window->GetWindowHandle(_hWnd);
 
 	BYTE ANDmaskIcon[128], XORmaskIcon[128];
 

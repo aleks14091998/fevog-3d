@@ -21,3 +21,9 @@ void Material::BindTextures(IShader *shader) {
 		texture->BindTexture(shader);
 	}
 }
+
+void Material::UnbindTextures() {
+	if (texture) {
+		texture->UnbindTexture();
+	}
+}

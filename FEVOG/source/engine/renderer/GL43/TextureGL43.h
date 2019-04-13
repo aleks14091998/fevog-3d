@@ -12,6 +12,7 @@ public:
 	~TextureGL43();
 
 	void BindTexture(IShader *shader);
+	void UnbindTexture();
 };
 
 #endif

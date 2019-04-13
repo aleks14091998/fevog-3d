@@ -15,6 +15,7 @@ public:
 	ITexture* GetTextureDefault();
 
 	void BindTextures(IShader *shader);
+	void UnbindTextures();
 };
 
 #endif

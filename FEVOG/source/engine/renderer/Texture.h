@@ -14,6 +14,7 @@ private:
 	E_TEXTURE_TYPE type;
 public:
 	virtual void BindTexture(IShader *shader) = 0;
+	virtual void UnbindTexture() = 0;
 	inline void SetTexType(E_TEXTURE_TYPE type) {
 		this->type = type; 
 	}

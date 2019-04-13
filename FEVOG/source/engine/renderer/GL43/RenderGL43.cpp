@@ -34,7 +34,7 @@ void CRenderGL43::Init() {
 
 void CRenderGL43::StartFrame() {
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
-	gl::ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	gl::ClearColor(0.1f, 0.1f, 0.2f, 1.0f);
 
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -105,6 +105,7 @@ void CRenderGL43::Draw(valk::render::ResourceList *list) {
 		if (list->Mesh) {
 			list->Material->BindTextures(shader);
 			list->Mesh->bind();
+			list->Material->UnbindTextures();
 		}
 	}
 }

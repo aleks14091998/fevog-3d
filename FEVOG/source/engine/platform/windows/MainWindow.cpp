@@ -10,7 +10,6 @@ CMainWindow::CMainWindow(Engine *engine) :
 	engine(engine),
 	_hInst(GetModuleHandle(NULL)),
 	_hWnd(NULL),
-	_hRenderWnd(NULL),
 	_hRC(NULL),
 	_bIsLooping(false), _c_uiMSAASamples(1u), _c_bVSync(true)
 {}
@@ -45,7 +44,6 @@ int CMainWindow::_wWinMain(HINSTANCE hInstance) {
 				_bIsLooping = false;
 			}
 			else {
-				EventSplit(&st_msg);
 				TranslateMessage(&st_msg);
 				DispatchMessage(&st_msg);
 			}
@@ -58,8 +56,9 @@ int CMainWindow::_wWinMain(HINSTANCE hInstance) {
 }
 
 LRESULT CALLBACK CMainWindow::s_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	CMainWindow *this_ptr = (CMainWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+	CMainWindow::s_CommandTopMenu(hWnd, message, wParam, lParam);
 
+	CMainWindow *this_ptr = (CMainWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 	if (this_ptr) {
 		if (message == WM_DESTROY) {
 			PostQuitMessage(0);
@@ -82,7 +81,7 @@ HRESULT CMainWindow::InitWindow(ProcDelegate *pDelMainLoop, MsgProcDelegate *pDe
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wcex.lpfnWndProc = (WNDPROC)CMainWindow::mv_WndProc;
+	wcex.lpfnWndProc = (WNDPROC)CMainWindow::s_WndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = _hInst;
@@ -102,7 +101,7 @@ HRESULT CMainWindow::InitWindow(ProcDelegate *pDelMainLoop, MsgProcDelegate *pDe
 	//--test--
 
 	_hWnd = CreateWindowExA(WS_EX_APPWINDOW, "MainWindowClass", "Valkyrie Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1000, 700, NULL, NULL, _hInst, NULL);
-	CreateChildWindow();
+	//CreateChildWindow();
 
 	if (!_hWnd)	{
 		_hWnd = NULL;
@@ -112,7 +111,7 @@ HRESULT CMainWindow::InitWindow(ProcDelegate *pDelMainLoop, MsgProcDelegate *pDe
 	if (!(_hDC = GetDC(_hWnd)))	{
 		return E_FAIL;
 	}
-	SetWindowLongPtr(_hRenderWnd, GWLP_USERDATA, (LONG_PTR)this);
+	SetWindowLongPtr(_hWnd, GWLP_USERDATA, (LONG_PTR)this);
 
 	this->InitRender();
 	return S_OK;
@@ -166,10 +165,6 @@ HRESULT CMainWindow::GetWindowHandle(WindowHandle& result) {
 	return S_OK;
 }
 
-HRESULT CMainWindow::GetRenderHandle(WindowHandle& result) {
-	result = _hRenderWnd;
-	return S_OK;
-}
 /*
 HRESULT CMainWindow::InitRender() {
 	uint msaa_samples = _c_uiMSAASamples;
@@ -230,7 +225,7 @@ HRESULT CMainWindow::InitRender() {
 HRESULT CMainWindow::InitRender() {
 	int pixel_format = NULL;
 	uint msaa_samples = _c_uiMSAASamples;
-	_hDC = GetDC(_hRenderWnd);
+	_hDC = GetDC(_hWnd);
 	PIXELFORMATDESCRIPTOR pfd =
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),
@@ -362,11 +357,11 @@ HRESULT CMainWindow::InitRender() {
 }
 
 HRESULT CMainWindow::GetClientRect(int32 &left, int32 &right, int32 &top, int32 &bottom) {
-	if (!_hRenderWnd) {
+	if (!_hWnd) {
 		return E_FAIL;
 	}
 	RECT rect;
-	::GetClientRect(_hRenderWnd, &rect);
+	::GetClientRect(_hWnd, &rect);
 
 	POINT lt, rb;
 
@@ -375,8 +370,8 @@ HRESULT CMainWindow::GetClientRect(int32 &left, int32 &right, int32 &top, int32 
 	rb.x = rect.right;
 	rb.y = rect.bottom;
 
-	ClientToScreen(_hRenderWnd, &lt);
-	ClientToScreen(_hRenderWnd, &rb);
+	ClientToScreen(_hWnd, &lt);
+	ClientToScreen(_hWnd, &rb);
 
 	left = lt.x;
 	right = rb.x;
@@ -385,171 +380,7 @@ HRESULT CMainWindow::GetClientRect(int32 &left, int32 &right, int32 &top, int32 
 
 	return S_OK;
 }
-
-HRESULT CMainWindow::CreateChildWindow() {
-	WNDCLASSEX wcexRender;
-	// render window
-	wcexRender.cbSize = sizeof(WNDCLASSEX);
-	wcexRender.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wcexRender.lpfnWndProc = (WNDPROC)CMainWindow::s_WndProc;
-	wcexRender.cbClsExtra = 0;
-	wcexRender.cbWndExtra = 0;
-	wcexRender.hInstance = _hInst;
-	wcexRender.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wcexRender.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcexRender.hbrBackground = (HBRUSH)(0);
-	wcexRender.lpszMenuName = NULL;
-	wcexRender.lpszClassName = "RenderWindowClass";
-	wcexRender.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-	// object list window
-	WNDCLASSA wcexObjectList;
-	memset(&wcexObjectList, 0, sizeof(wcexObjectList));
-	wcexObjectList.lpfnWndProc = (WNDPROC)CMainWindow::ol_WndProc;
-	wcexObjectList.hInstance = _hInst;
-	wcexObjectList.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcexObjectList.hbrBackground = (HBRUSH)GetStockObject(3);
-	wcexObjectList.lpszClassName = "ObjectListClass";
-
-	// object params window
-	WNDCLASSA wcexObjectParams;
-	memset(&wcexObjectParams, 0, sizeof(wcexObjectParams));
-	wcexObjectParams.lpfnWndProc = (WNDPROC)CMainWindow::mv_WndProc;
-	wcexObjectParams.hInstance = _hInst;
-	wcexObjectParams.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcexObjectParams.hbrBackground = (HBRUSH)GetStockObject(3);
-	wcexObjectParams.lpszClassName = "ObjectParamsClass";
-	// spliters
-	WNDCLASS wcSPlitV;
-	ZeroMemory(&wcSPlitV, sizeof(WNDCLASS));
-	wcSPlitV.hInstance = _hInst;
-	wcSPlitV.lpszClassName = "SplitterVClass";
-	wcSPlitV.lpfnWndProc = (WNDPROC)CMainWindow::mv_WndProc;
-	wcSPlitV.hbrBackground = (HBRUSH)GetStockObject(2);
-	wcSPlitV.hCursor = LoadCursor((HINSTANCE)NULL, IDC_SIZEWE);
-
-	WNDCLASS wcSPlitH;
-	ZeroMemory(&wcSPlitH, sizeof(WNDCLASS));
-	wcSPlitH.hInstance = _hInst;
-	wcSPlitH.lpszClassName = "SplitterHClass";
-	wcSPlitH.lpfnWndProc = (WNDPROC)CMainWindow::mv_WndProc;
-	wcSPlitH.hbrBackground = (HBRUSH)GetStockObject(2);
-	wcSPlitH.hCursor = LoadCursor((HINSTANCE)NULL, IDC_SIZENS);
-
-	if (RegisterClass(&wcSPlitV) == FALSE || RegisterClass(&wcSPlitH) == FALSE) {
-		return E_FAIL;
-	}
-
-	if (RegisterClassEx(&wcexRender) == FALSE || RegisterClass(&wcexObjectList) == FALSE || RegisterClass(&wcexObjectParams) == FALSE) {
-		//	_pEngineCore->AddToLog("Couldn't register window class!", true);
-		return E_FAIL;
-	}
-
-	DWORD dwExStyleSplit = WS_EX_WINDOWEDGE;
-	DWORD dwStyleSplit = WS_CHILD | WS_VISIBLE;
-
-	int part1X = 0;
-	int part1Y = 0;
-	int part1W = GetWindowDataInPercent(75, 'w');
-	int part1H = GetWindowDataInPercent(70, 'h');
-
-	int part2X = 0;
-	int part2Y = part1H;
-	int part2W = part1W;
-	int part2H = GetWindowDataInPercent(30, 'h');
-
-	int part3X = 0;
-	int part3Y = part1Y;
-	int part3W = GetWindowDataInPercent(25, 'w');
-	int part3H = GetWindowDataInPercent(45, 'h');
-
-	int part4X = part1W;
-	int part4Y = part1H;
-	int part4W = part3W;
-	int part4H = GetWindowDataInPercent(45, 'h');
-
-	// create splits
-	split1 = CreateWindowEx(dwExStyleSplit, "SplitterVClass", (LPCTSTR)NULL, dwStyleSplit, part1W, 0, 3, GetWindowDataInPercent(100, 'h'), _hWnd, (HMENU)NULL, _hInst, (LPVOID)NULL);
-	split2 = CreateWindowEx(dwExStyleSplit, "SplitterHClass", (LPCTSTR)NULL, dwStyleSplit, 0, part1H, part1W, 3, _hWnd, (HMENU)NULL, _hInst, (LPVOID)NULL);
-	split3 = CreateWindowEx(dwExStyleSplit, "SplitterHClass", (LPCTSTR)NULL, dwStyleSplit, part1W, part3H, part3W, 3, _hWnd, (HMENU)NULL, _hInst, (LPVOID)NULL);
-
-	// create children
-	_hRenderWnd = CreateWindow("RenderWindowClass", "Render", WS_CHILD | WS_BORDER, 0, 0, part1W, part1H, _hWnd, NULL, _hInst, NULL);
-	_hObjectListWnd = CreateWindow("ObjectListClass", "Object List", WS_CHILD | WS_BORDER, part1W - 1, 0, part3W, part3H, _hWnd, NULL, _hInst, NULL);
-	
-	_hObjList = CreateWindow("LISTBOX", "CarCatalogListBox", LBS_EXTENDEDSEL | WS_CHILD | WS_VSCROLL | WS_VISIBLE | LBS_USETABSTOPS, 0, 0, part3W, part3H, _hObjectListWnd, NULL, NULL, NULL);
-	
-
-	ShowWindow(_hRenderWnd, SW_SHOWNORMAL);
-	ShowWindow(_hObjectListWnd, SW_SHOWNORMAL);
-
-	return S_OK;
-}
-
-LRESULT CALLBACK CMainWindow::mv_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	switch (message) {
-		case WM_COMMAND: {
-			switch (wParam)	{
-				case ID_MVM_HELP_ABOUT:
-					ShowModalUserAlert(hWnd, "Author: Alexander Ursul\nOpenGL Version: 4.3", "About");
-				break;
-
-				case ID_MVM_FILE_EXIT:
-					uint result = MessageBox(hWnd, "Do you really want to leave", "Exit", MB_YESNO | MB_ICONQUESTION | MB_APPLMODAL);
-					if (result == IDYES) {
-						CMainWindow::s_WndProc(hWnd, WM_CLOSE, 0, 0);
-					}
-					
-				break;
-			}
-		}
-		case WM_KEYDOWN:
-
-		break;
-		case WM_MOUSEMOVE:
-			if (GetFocus() != hWnd) {
-				SetFocus(hWnd);
-			}
-		break;
-
-		case WM_CLOSE:
-		/*	uint result = MessageBox(hWnd, "Do you really want to leave", "Exit", MB_YESNO | MB_ICONQUESTION | MB_APPLMODAL);
-			if (result == IDYES) {
-				CMainWindow::s_WndProc(hWnd, WM_CLOSE, 0, 0);
-			}*/
-		break;
-		
-	}
-	return DefWindowProc(hWnd, message, wParam, lParam);
-
-}
-
-LRESULT CALLBACK CMainWindow::ol_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	switch (message) {
-		case WM_CTLCOLORLISTBOX: {
-			LRESULT color = (LRESULT)GetStockObject(3);
-			SetBkMode((HDC)wParam, color);
-			SetTextColor((HDC)wParam, RGB(180, 180, 180));
-			return color;
-		}
-
-		case WM_CREATE:
-		
-		break;
-
-		case WM_MOUSEMOVE: 
-			if (GetFocus() != hWnd) {
-				SetFocus(hWnd);
-			}
-		break;
-			
-		default: {
-			return DefWindowProc(hWnd, message, wParam, lParam);
-		}
-	}
-
-}
-
+/// под вопросом
 int CMainWindow::GetWindowDataInPercent(int percent, char type) {
 	HDC tempHdc = GetDC(NULL);
 	switch (type) {
@@ -566,74 +397,29 @@ int CMainWindow::GetWindowDataInPercent(int percent, char type) {
 	}
 }
 
-void CMainWindow::EventSplit(MSG *msg) {
-	switch (msg->message) {
-		case WM_LBUTTONDOWN:
-			if (GetFocus() == split1) {
-				_bSplit1 = true;
-			} else if (GetFocus() == split2){
-				_bSplit2 = true;
-			} else if (GetFocus() == split3) {
-				_bSplit3 = true; 
+void CMainWindow::s_CommandTopMenu(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	switch (message) {
+		case WM_COMMAND: {
+			switch (wParam) {
+			case ID_MVM_HELP_ABOUT:
+				ShowModalUserAlert(hWnd, "Author: Alexander Ursul\nOpenGL Version: 4.3", "About");
+				break;
+
+			case ID_MVM_FILE_EXIT:
+				uint result = MessageBox(hWnd, "Do you really want to leave", "Exit", MB_YESNO | MB_ICONQUESTION | MB_APPLMODAL);
+				if (result == IDYES) {
+					CMainWindow::s_WndProc(hWnd, WM_CLOSE, 0, 0);
+				}
+
+				break;
 			}
-			break;
-		case WM_LBUTTONUP:
-			_bSplit1 = false;
-			_bSplit2 = false;
-			_bSplit3 = false;
-		///	SetForegroundWindow(_hRenderWnd);
-			break;
+		}
 	}
-	if (_bSplit1) {
-		POINT ptPos;
-		RECT part1Rect, part2Rect, mainRect, mainClientRect;
-		GetCursorPos(&ptPos);
-		GetWindowRect(_hWnd, &mainRect);
-		::GetClientRect(_hWnd, &mainClientRect);
-		GetWindowRect(_hRenderWnd, &part1Rect);
-		GetWindowRect(_hObjectListWnd, &part2Rect);
-		int part2W = part2Rect.bottom - part2Rect.top;
-		int part2Split = (mainRect.right - mainRect.left) - (part1Rect.right - part1Rect.left);
-		int paddingX = mainRect.right - mainClientRect.right - 7;
-		ptPos.x = ptPos.x - paddingX;
-		SetWindowPos(split1, NULL, ptPos.x, 0, 0, 0, SWP_NOSIZE);
-		SetWindowPos(split2, NULL, 0, 0, ptPos.x, 3, SWP_NOMOVE | SWP_NOZORDER);
-		SetWindowPos(split3, NULL, ptPos.x - 1, part2W, part2Split, 3, SWP_NOZORDER);
-
-		SetWindowPos(_hRenderWnd, NULL, 0, 0, ptPos.x, part1Rect.bottom - part1Rect.top, SWP_NOMOVE | SWP_NOZORDER);
-		SetWindowPos(_hObjectListWnd, NULL, ptPos.x-1, 0, part2Split, part2W, SWP_NOZORDER);
-		SetWindowPos(_hObjList, NULL, 0, 0, part2Split - 15, part2W, SWP_NOMOVE | SWP_NOZORDER);
-
-		InvalidateRect(_hObjList, 0, true);
-
-	} else if (_bSplit2) {
-		POINT ptPos;
-		RECT part1Rect, part2Rect, mainRect, mainClientRect;
-		GetCursorPos(&ptPos);
-		GetWindowRect(_hWnd, &mainRect);
-		::GetClientRect(_hWnd, &mainClientRect);
-		GetWindowRect(_hRenderWnd, &part1Rect);
-		GetWindowRect(_hObjectListWnd, &part2Rect);
-		int paddingY = mainRect.bottom - mainClientRect.bottom - 7;
-		int part2W = part2Rect.bottom - part2Rect.top;
-		int part2Split = (mainRect.right - mainRect.left) - (part1Rect.right - part1Rect.left);
-		ptPos.y = ptPos.y - paddingY;
-		SetWindowPos(split2, NULL, 0, ptPos.y, 0, 0, SWP_NOSIZE);
-		SetWindowPos(_hRenderWnd, NULL, 0, 0, part1Rect.right - part1Rect.left, ptPos.y, SWP_NOMOVE | SWP_NOZORDER);
-	
-	} else if (_bSplit3) {
-
-	}
-	if(GetFocus() == split1)
-	OutputDebugString("true\n");
-	else
-	OutputDebugString("false\n");
-
 }
 
 void CMainWindow::UpdateObjectList(std::vector<IObject*> objList) {
-	::SendMessage(_hObjList, LB_RESETCONTENT, 0, 0);
+	/*::SendMessage(_hObjList, LB_RESETCONTENT, 0, 0);
 	for (uint i = 0; i < objList.size(); i++) {
 		::SendMessage(_hObjList, LB_ADDSTRING, 0, (LPARAM)(LPSTR)objList[i]->GetName());
-	}
+	}*/
 }

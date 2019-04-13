@@ -7,9 +7,7 @@ class CMainWindow : public IMainWindow {
 private:
 	Engine				*engine;
 	HINSTANCE			_hInst;
-	HWND				_hWnd, _hRenderWnd, _hObjectListWnd, _hObjectParamsWnd, _hObjList;
-	HWND				split1, split2, split3;
-	bool				_bSplit1, _bSplit2, _bSplit3;
+	HWND				_hWnd;
 	HDC					_hDC;
 	ProcDelegate		*delMainLoop;
 	MsgProcDelegate		*delMessageProc;
@@ -21,11 +19,9 @@ private:
 	
 	int	WINAPI			_wWinMain(HINSTANCE hInstance);
 	static LRESULT CALLBACK s_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	static LRESULT CALLBACK mv_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	static LRESULT CALLBACK ol_WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	static void CALLBACK s_CommandTopMenu(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	HRESULT InitRender();
-	HRESULT CreateChildWindow();
 public:
 	CMainWindow(Engine *engine);
 	~CMainWindow();
@@ -38,11 +34,9 @@ public:
 	HRESULT KillWindow();
 	HRESULT Destroy();
 	HRESULT GetWindowHandle(WindowHandle& result);
-	HRESULT GetRenderHandle(WindowHandle& result);
 	HRESULT GetClientRect(int32 &l, int32 &r, int32 &t, int32 &b);
 	int GetWindowDataInPercent(int percent, char type);
 	void UpdateObjectList(std::vector<IObject*> objList);
-	void EventSplit(MSG *msg);
 
 };
 

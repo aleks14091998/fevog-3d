@@ -43,3 +43,8 @@ void TextureGL43::BindTexture(IShader *shader) {
 	gl::ActiveTexture(gl::TEXTURE0);
 	gl::BindTexture(gl::TEXTURE_2D, id);
 }
+
+void TextureGL43::UnbindTexture() {
+	gl::ActiveTexture(gl::TEXTURE0);
+	gl::BindTexture(gl::TEXTURE_2D, 0);
+}
